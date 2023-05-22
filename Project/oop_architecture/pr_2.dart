@@ -43,8 +43,11 @@ void print_product_menu({required List<Map> AllProduct})
   print("Press 4 For Hair Oil");
   print("Press 5 For Face Wash");
   print("Press 6 For Alovera Gel");
+  print("----------------------------------------------");
+  print("Press 7 For Goto Search");
+ // print("Press 8 for Add Customer");
+  print("Press 9 For Exit");
   print("Press 0 For Billing");
-  print("Press 7 For Exit");
   print("----------------------------------------------");
 }
 
@@ -113,15 +116,16 @@ void main()
   print("----------------------------------------------");
   
   List<Super_Market> customers=List.generate(cust_n,(index){
-    stdout.write("Enter Id :");
+    print("-------Cutomer ${index+1}/$cust_n-------");
+    stdout.write("Enter Id\t\t:");
     id=int.parse(stdin.readLineSync()!);
-    stdout.write("Enter Customer :");
+    stdout.write("Enter Customer Name\t:");
     name=stdin.readLineSync()!;
-    stdout.write("Enter Contact Number :");
+    stdout.write("Enter Contact Number\t:");
     contact=stdin.readLineSync()!;
 
     return Super_Market.Customer(cust_id: id, cust_name: name, cust_contact: contact);
-    
+    growable:true;
   });
   int ch,c_id;
   List<Map> tmp_pro=List.empty(growable: true);
@@ -285,13 +289,18 @@ void main()
     break;
 
     case 0:
+    if(tmp_pro.isNotEmpty)
+      {
       int check_cust=0;
      do{
+
+        
         stdout.write("Enter Cutomer Id :");
         c_id=int.parse(stdin.readLineSync()!);
         int i;
         for(i=0;i<cust_n;i++)
         {
+        
             if(customers[i].cust_id==c_id)
             {
                 check_cust=1;
@@ -301,6 +310,8 @@ void main()
         if(check_cust==1)
         {
               dynamic bill=0;
+              
+
               customers[i].Set_Product(m1: tmp_pro);
               tmp_pro.forEach((element) { 
                 bill=bill+(element['pro_qty']*element['pro_price']);
@@ -321,13 +332,76 @@ void main()
      }while(check_cust!=1);
      qty=local_id=isadded=added_qty=0;
       tmp_pro=List.empty(growable: true);
-
+     }
+     else 
+     {
+      print("Your Cart Is Empty..!!");
+     }
       
      break;
 
      case 7:
-        
+         int ch1;
+  
+        do{
+            print_label();
+            print("Press 1 For Search Customer By Their ID ");
+            print("Press 2 for Shopping");
+            print("Press 0 For Exit");
+            stdout.write("Enter Your Choice :");
+            ch1=int.parse(stdin.readLineSync()!);
+
+            switch(ch1)
+            {
+              case 1:
+                stdout.write("Enter Customer Id :");
+                int cid=int.parse(stdin.readLineSync()!);
+                int check_exist=0;
+                for(int i=0;i<cust_n;i++)
+                {
+                  if(customers[i].cust_id==cid)
+                  {
+                    customers[i].getData();
+                    check_exist=1;
+                  }
+                }
+                if(check_exist==0)
+                {
+                  print("Customer ID Not Found..!!");
+                }
+              break;
+
+              case 2:
+                  ch1=0;
+              break;
+
+              case 0:
+                exit(0);
+            
+
+              default:
+              print("Invalid Choice...");
+              break;
+            }
+          }while(ch1!=0);
+
      break;
+
+    //  case 8:
+    
+    // stdout.write("Enter Id\t\t:");
+    // id=int.parse(stdin.readLineSync()!);
+    // stdout.write("Enter Customer Name\t:");
+    // name=stdin.readLineSync()!;
+    // stdout.write("Enter Contact Number\t:");
+    // contact=stdin.readLineSync()!;
+    // customers.add(Super_Market.single_Customer(cust_id: id, cust_name: name, cust_contact: contact));
+
+    //  break; 
+
+    case 9:
+      exit(0);
+    break;
 
      default:
       print("Invalid Choice..!");
@@ -335,45 +409,8 @@ void main()
         
   }
     
- }while(ch!=7);
+ }while(ch!=9);
   
-  int ch1;
-  
-  do{
-      print_label();
-      print("Press 1 For Search Customer By Their ID ");
-      print("Press 0 For Exit");
-      stdout.write("Enter Your Choice :");
-      ch1=int.parse(stdin.readLineSync()!);
-
-      switch(ch1)
-      {
-        case 1:
-          stdout.write("Enter Customer Id :");
-          int cid=int.parse(stdin.readLineSync()!);
-          int check_exist=0;
-          for(int i=0;i<cust_n;i++)
-          {
-            if(customers[i].cust_id==cid)
-            {
-              customers[i].getData();
-              check_exist=1;
-            }
-          }
-          if(check_exist==0)
-          {
-            print("Customer ID Not Found..!!");
-          }
-        break;
-
-        default:
-        print("Invalid Choice...");
-        break;
-      }
-
-    
-
-  }while(ch1!=0);
-
+ 
 }
 

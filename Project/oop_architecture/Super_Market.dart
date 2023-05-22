@@ -35,6 +35,8 @@ class Super_Market
   //  late String pro_name;
   //  late int pro_price;
 
+    Super_Market.single_Customer({required this.cust_id,required this.cust_name,required this.cust_contact});
+
      void Set_Product({required List<Map> m1})
      {
       // this.pro_id=pro_id;
@@ -86,17 +88,27 @@ class Super_Market
        print("Name\t\t: $cust_name");
        print("Contact\t\t: $cust_contact");
       print("-------------------------------------------------------------------------------------");
-       print("Id\tName\t\t\tquantity\tPrice\tAmount");
-       int amt;
-       Product.forEach((element) {
-        amt=element['pro_qty']*element['pro_price'];
-        print("${element['pro_id']}\t${element['pro_name']}\t${element['pro_qty']}\t\t${element['pro_price']}\t$amt");
-       });
-       print("-----------------------------------------------------------------------------------");
-       print("Bill\t\t\t\t\t\t\t$bill");
-       print("Discount\t\t\t\t\t\t$disc");
-       print("Total Amount\t\t\t\t\t\t$amount");
-       print("-----------------------------------------------------------------------------------");
+
+      if(Product.isNotEmpty)
+      {
+          print("Id\tName\t\t\tquantity\tPrice\tAmount");
+          int amt;
+          Product.forEach((element) {
+            amt=element['pro_qty']*element['pro_price'];
+            print("${element['pro_id']}\t${element['pro_name']}\t${element['pro_qty']}\t\t${element['pro_price']}\t$amt");
+          });
+          print("-----------------------------------------------------------------------------------");
+          print("Bill\t\t\t\t\t\t\t$bill");
+          print("Discount\t\t\t\t\t\t$disc");
+          print("Total Amount\t\t\t\t\t\t$amount");
+          print("-----------------------------------------------------------------------------------");
+      }
+      else 
+      {
+          print("Your Cart Is Empty..!!");
+      }
+
+       
      }
 
 
