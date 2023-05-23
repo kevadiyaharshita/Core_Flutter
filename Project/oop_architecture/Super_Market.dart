@@ -24,25 +24,18 @@ class Super_Market
     late int cust_id;
     late String cust_name;
     late String cust_contact;
-    late List<Map> Product=List.empty(growable: true);
+    late List<Map> Product=[];
          int bill=0;
     late int disc;
     late int amount;
 
     
 
-  //  late int pro_id;
-  //  late String pro_name;
-  //  late int pro_price;
-
+ 
     Super_Market.single_Customer({required this.cust_id,required this.cust_name,required this.cust_contact});
 
      void Set_Product({required List<Map> m1})
      {
-      // this.pro_id=pro_id;
-      // this.pro_name=pro_name;
-      // this.pro_price=pro_price;
-
       m1.forEach((element) { 
         Product.add(element);
       });
@@ -111,31 +104,52 @@ class Super_Market
        
      }
 
-
      Super_Market.Customer({required this.cust_id,required this.cust_name,required this.cust_contact});
    
 }
 
+class Product_List
+{
+  List<Map> AllProduct=[];
+  Product_List()
+  {
+        AllProduct=[
+    {
+      'pro_id': 1,
+      'pro_name': 'Tooth Paste[oxi9]',
+      'pro_price': 150,
+    },
+    {
+      'pro_id': 2,
+      'pro_name': 'Tooth Brush[oxi9]',
+      'pro_price': 99,
+    },
+    {
+      'pro_id': 3,
+      'pro_name': 'Apple Shampoo[oxi9]',
+      'pro_price': 250,
+    },
+    {
+      'pro_id': 4,
+      'pro_name': 'palm Hair Oil[oxi9]',
+      'pro_price': 350,
+    },
+    {
+      'pro_id': 5,
+      'pro_name': 'Rose Face Wash[oxi9]',
+      'pro_price': 299,
+    },
+    {
+      'pro_id': 6,
+      'pro_name': 'Alovera Gel[oxi9]',
+      'pro_price': 260,
+    },
+    
+  ];
+  }
+   
+}
 
-
-// class Product 
-// {
-//    int pro_id;
-//    String pro_name;
-//    int pro_price;
-
-//    Product({required this.pro_id,required this.pro_name,required this.pro_price});
-// }
-
-// class Customer extends Product
-// {
-//      int cust_id;
-//      String cust_name;
-//      String cust_contact;
-//      List<int> pro_id=List.filled(6, 0);
-  
-//      Customer.details({required this.cust_id,required this.cust_name,required this.cust_contact});
-// }
 
 
 

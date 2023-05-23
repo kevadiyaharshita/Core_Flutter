@@ -45,7 +45,7 @@ void print_product_menu({required List<Map> AllProduct})
   print("Press 6 For Alovera Gel");
   print("----------------------------------------------");
   print("Press 7 For Goto Search");
- // print("Press 8 for Add Customer");
+  print("Press 8 for Add Customer");
   print("Press 9 For Exit");
   print("Press 0 For Billing");
   print("----------------------------------------------");
@@ -73,44 +73,14 @@ void main()
   String name;
   String contact;
 
-  List<Map> AllProduct=[
-    {
-      'pro_id': 1,
-      'pro_name': 'Tooth Paste[oxi9]',
-      'pro_price': 150,
-    },
-    {
-      'pro_id': 2,
-      'pro_name': 'Tooth Brush[oxi9]',
-      'pro_price': 99,
-    },
-    {
-      'pro_id': 3,
-      'pro_name': 'Apple Shampoo[oxi9]',
-      'pro_price': 250,
-    },
-    {
-      'pro_id': 4,
-      'pro_name': 'palm Hair Oil[oxi9]',
-      'pro_price': 350,
-    },
-    {
-      'pro_id': 5,
-      'pro_name': 'Rose Face Wash[oxi9]',
-      'pro_price': 299,
-    },
-    {
-      'pro_id': 6,
-      'pro_name': 'Alovera Gel[oxi9]',
-      'pro_price': 260,
-    },
-    
-  ];
+  
+
+  Product_List p_list=Product_List();
 
   print_label();
   stdout.write("How Many Customer :");
   cust_n = int.parse(stdin.readLineSync()!);
-  
+  cust_n=1;
   print_label();
   print("     Enter Details Of Customer  ");
   print("----------------------------------------------");
@@ -125,18 +95,18 @@ void main()
     contact=stdin.readLineSync()!;
 
     return Super_Market.Customer(cust_id: id, cust_name: name, cust_contact: contact);
-    growable:true;
+  
   });
   int ch,c_id;
   List<Map> tmp_pro=List.empty(growable: true);
  do{
-  print_label();
-  
-  print_product_menu(AllProduct: AllProduct);
-  stdout.write("Enter Your Choice :");
-  ch=int.parse(stdin.readLineSync()!);
-  Map m=Map();
-  int qty,local_id,isadded=0,added_qty=0;
+    print_label();
+    
+    print_product_menu(AllProduct: p_list.AllProduct);
+    stdout.write("Enter Your Choice :");
+    ch=int.parse(stdin.readLineSync()!);
+    Map m=Map();
+    int qty,local_id,isadded=0,added_qty=0;
   switch(ch)
   {
     case 1:
@@ -159,7 +129,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[0]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[0]));
          }
          
      
@@ -185,7 +155,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[1]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[1]));
          }
     break;
 
@@ -211,7 +181,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[2]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[2]));
          }
     break;
 
@@ -236,7 +206,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[3]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[3]));
          }
     break;
 
@@ -260,7 +230,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[4]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[4]));
          }
     break;
 
@@ -284,7 +254,7 @@ void main()
         }
          else 
          {
-          tmp_pro.add(Add_product_fun(AllProduct[5]));
+          tmp_pro.add(Add_product_fun(p_list.AllProduct[5]));
          }
     break;
 
@@ -388,21 +358,25 @@ void main()
 
      break;
 
-    //  case 8:
+     case 8:
     
-    // stdout.write("Enter Id\t\t:");
-    // id=int.parse(stdin.readLineSync()!);
-    // stdout.write("Enter Customer Name\t:");
-    // name=stdin.readLineSync()!;
-    // stdout.write("Enter Contact Number\t:");
-    // contact=stdin.readLineSync()!;
-    // customers.add(Super_Market.single_Customer(cust_id: id, cust_name: name, cust_contact: contact));
+        stdout.write("Enter Id\t\t:");
+        id=int.parse(stdin.readLineSync()!);
+        stdout.write("Enter Customer Name\t:");
+        name=stdin.readLineSync()!;
+        stdout.write("Enter Contact Number\t:");
+        contact=stdin.readLineSync()!;
+        customers.add(Super_Market.single_Customer(cust_id: id, cust_name: name, cust_contact: contact));
+        cust_n++;
+        customers.forEach((element) { 
+          print(element.cust_id);
+        });
 
-    //  break; 
+     break; 
 
     case 9:
       exit(0);
-    break;
+  
 
      default:
       print("Invalid Choice..!");
