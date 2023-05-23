@@ -311,7 +311,8 @@ void main()
         {
               dynamic bill=0;
               
-
+              customers[i].Product=List.empty(growable: true);
+              
               customers[i].Set_Product(m1: tmp_pro);
               tmp_pro.forEach((element) { 
                 bill=bill+(element['pro_qty']*element['pro_price']);

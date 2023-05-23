@@ -51,7 +51,7 @@ class Super_Market
 
      void setBill(int bill)
      {
-      this.bill=this.bill+bill;
+      this.bill=bill;
      }
 
      void setDiscount()
