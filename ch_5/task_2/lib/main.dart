@@ -23,7 +23,6 @@ void main()
                   TextSpan(text: 'Shapping "skills" for "scalinh" higer\n',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                   TextSpan(text: "-RNW",style: TextStyle(fontSize: 22,fontWeight:FontWeight.normal))
                 ],
-
               ),
 
             ),
@@ -37,7 +36,6 @@ void main()
               ),
             ),
           ),
-
         ),
       ),
     ),
