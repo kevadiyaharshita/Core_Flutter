@@ -37,7 +37,7 @@ void main()
                 ),
               ),
             ),
-            alignment: Alignment(0,-2.70),
+            alignment: Alignment(100,-2.70),
             child: Text("🔥",style: TextStyle(fontSize: 35),),
           ),
         ),
