@@ -4,6 +4,7 @@ void main()
 {
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text("Dark Shadow Button"),
