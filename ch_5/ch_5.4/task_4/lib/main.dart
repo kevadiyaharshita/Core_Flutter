@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp>
   Color firstColor=Color(0xff75E2FF);
   Color secondColor=Color(0xff5689C0);
   int counter=1;
+  Icon i=Icon(Icons.ice_skating);
     @override
   Widget build(BuildContext context)
     {
@@ -35,96 +36,119 @@ class _MyAppState extends State<MyApp>
         body: Align(
           alignment: Alignment.center,
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Column(
-                children: List.generate(counter, (index){
+          child:SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                  if(index % 2 == 0) {
-                    return Container(
-                      width: 390,
-                      height: 120,
-                      decoration: BoxDecoration(
+                  children: List.generate(counter, (index){
 
-                        color: firstColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text("${index+1}",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
+                    if(index % 2 == 0) {
+                      return Container(
+                        width: 390,
+                        height: 115,
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+
+                          color: firstColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ),
-                    );
+                        alignment: Alignment.center,
+                        child: Text("${index+1}",
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }
+                    else
+                    {
+                      return Container(
+                        width: 390,
+                        height: 115,
+                        decoration: BoxDecoration(
+
+                          color: secondColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text("${index+1}",
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+
+
+
+                  ),
+                ),
+          ),
+
+      ),
+        floatingActionButton: Row(
+          children: [
+          SizedBox(width: 290,),
+          InkWell(
+            onTap: ()
+            {
+              setState(() {
+                counter++;
+              });
+
+            },
+
+            child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: bgappBar,
+                          ),
+                          alignment: Alignment.center,
+                          child:Text("+",
+                            style: TextStyle(fontSize: 40,
+                              color: Colors.white,
+                            ),
+                          )
+            ),
+          ),
+            SizedBox(width: 10,),
+            InkWell(
+              onTap: (){
+                setState(() {
+                  if(counter>1)
+                  {
+                    counter--;
                   }
                   else
                   {
-                    return Container(
-                      width: 390,
-                      height: 120,
-                      decoration: BoxDecoration(
 
-                        color: firstColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text("${index+1}",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                    );
                   }
-                }
+                });
 
-
-
-                ),
-              ),
-              Column(
-
-                children: [
-
-                   Align(alignment: Alignment.bottomRight,),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: bgappBar,
-                            ),
-                            alignment: Alignment.center,
-                            child:Text("+",
-                              style: TextStyle(fontSize: 50,
-                                color: Colors.white,
-                              ),)
-                        ),
-                        Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: bgappBar,
-                            ),
-                            alignment: Alignment.center,
-                            child:Text("-",
-                              style: TextStyle(fontSize: 50,
-                                color: Colors.white,
-                              ),)
-                        )
-                      ],
+              },
+              child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: bgappBar,
                   ),
-                ],
-              )
-            ],
+                  alignment: Alignment.center,
+                  child:Text("-",
+                    style: TextStyle(fontSize: 40,
+                      color: Colors.white,
+                    ),
+                  )
+              ),
+            ),
+           ],
         ),
-      ),
       );
     }
 }

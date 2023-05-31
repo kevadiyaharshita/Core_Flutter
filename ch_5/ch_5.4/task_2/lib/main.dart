@@ -36,7 +36,38 @@ class  _MyAppState extends State<MyApp>
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: sp,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children:
+            allIcons.map((e){
+
+              return Container(
+                width: double.infinity,
+                height: 100,
+                padding: EdgeInsets.all(30),
+
+                decoration: BoxDecoration(
+                  color: Colors.white,
+
+                ),
+
+                child: Row(
+
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Text(e['name'],style: TextStyle(
+                      fontSize: 26
+                    ),) ,
+                    SizedBox(
+                      width: 100,
+                    ),
+                    e['icon'],
+                  ],
+                ),
+              );
+            }
+            ).toList(),
+
       ),
 
     ),
