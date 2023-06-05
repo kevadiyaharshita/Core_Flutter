@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f1801e0-9b99-4d44-b97a-117fc23778ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/eccom_app/lib/utils/allProduct.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/eccom_app/lib/utils/color_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/eccom_app/lib/views/screens/home_Page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/practice_task/lib/utils/color_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/practice_task/lib/utils/product_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ch_5.5/practice_task/lib/views/screens/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ch_4.2/encapsulation_demo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../ch_4.2/encapsulation_demo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ch_4.3/Student_class.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../ch_4.3/Student_class.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ch_4.3/setter_getter_demo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../ch_4.3/setter_getter_demo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ch_5.4/calculator_task_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ch_5.4/calculator_task_1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../poduct_list/lib/utils/Pro_uti.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../poduct_list/lib/utils/Pro_uti.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +38,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "E:/flutter1/ch_5/ch_5.4/calculator_task_1",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "show.migrate.to.gradle.popup": "false"
   }

@@ -10,13 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2bfa7f6-293b-4d30-bd51-3c3ef6f8fa3b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/eccom_app/lib/utils/allProduct.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/eccom_app/lib/utils/color_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/eccom_app/lib/views/screens/home_Page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/practice_task/lib/utils/color_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/practice_task/lib/utils/product_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ch_5.5/practice_task/lib/views/screens/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../ch_4.2/encapsulation_demo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ch_4.2/encapsulation_demo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../ch_4.3/Student_class.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ch_4.3/Student_class.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../ch_4.3/setter_getter_demo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ch_4.3/setter_getter_demo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ch_5.1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ch_5.1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task_2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../task_2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task_2/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../task_2/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task_4/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../task_4/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../poduct_list/lib/utils/Pro_uti.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../poduct_list/lib/utils/Pro_uti.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,19 +41,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/flutter1/ch_5/ch_5.4/task_2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "E:/flutter1/ch_5/ch_5.4/calculator_task_1",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
