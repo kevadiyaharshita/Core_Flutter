@@ -85,30 +85,42 @@ class _detail_PageState extends State<detail_Page> {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                                onPressed: (){
-                                  setState(() {
-                                    count++;
-                                    print("count: $count");
-                                  });
-                                },
-                                icon: Icon(Icons.remove,color: Colors.white,)
-                            ),
-                            Text("${count}",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                              ),),
 
-                            IconButton(
-                                onPressed: (){
-                                  setState(() {
-                                    count++;
-                                    print("count: $count");
-                                  });
-                                },
-                                icon: Icon(Icons.add,color: Colors.white,)
+                          children: [
+                            Expanded(
+                              child: IconButton(
+                                  onPressed: (){
+                                    setState(() {
+                                      if(count>1)
+                                        count--;
+                                      print("count: $count");
+                                    });
+                                  },
+                                  icon: Icon(Icons.remove,color: Colors.white,)
+                              ),
+                            ),
+                            Expanded(
+                              child: Center(
+
+                                child: Text("${count}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+
+                                  ),),
+                              ),
+                            ),
+
+                            Expanded(
+                              child: IconButton(
+                                  onPressed: (){
+                                    setState(() {
+                                      count++;
+                                      print("count: $count");
+                                    });
+                                  },
+                                  icon: Icon(Icons.add,color: Colors.white,)
+                              ),
                             ),
                           ],
                         ),
@@ -173,25 +185,7 @@ class _detail_PageState extends State<detail_Page> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
-                            // bool check=HP_Counter.contains(data['id']);
-                            // bool check=false;
-                            // for(int i=0;i<HP_Counter.length;i++)
-                            // {
-                            //   // check=HP_Counter[i].contains(e['id']);
-                            //   check= HP_Counter[i].containsValue(data['id']);
-                            // }
-                            //
-                            //
-                            // if(HP_Counter.contains(data['id']))
-                            //   {
-                            //     HP_Counter[data['id']-1]['qty']=count;
-                            //   }
-                            // else
-                            //   {
-                            //     Map tmp_qtyMap=data;
-                            //     tmp_qtyMap.addAll({'qty': count});
-                            //     HP_Counter.add(tmp_qtyMap);
-                            //   }
+
                             data['qty']=count;
 
                             Navigator.of(context).pushNamed(MyRoutes.cartPage,);
@@ -266,124 +260,3 @@ Widget box(String t)
 }
 
 
-// Container(
-//   width: w,
-//   height: h-290,
-//
-//   decoration: BoxDecoration(
-//     color: Colors.white,
-//     borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-//   ),
-//   child: Padding(
-//     padding: EdgeInsets.all(18),
-//     child: Column(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//
-//       children: [
-//         Container(
-//           width: 100,
-//           height: 50,
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(30),
-//             color: cgreen,
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: [
-//               GestureDetector(
-//                   onTap: (){
-//                     setState(() {
-//                       if(count>1)
-//                          count--;
-//                     });
-//                   },
-//                   child: Icon(Icons.remove,color: Colors.white,)
-//               ),
-//               Text("${count}",
-//               style: TextStyle(
-//                 color: Colors.white,
-//               ),),
-//
-//               GestureDetector(
-//                 onTap: (){
-//                   setState(() {
-//                     count++;
-//                   });
-//                 },
-//                   child: Icon(Icons.add,color: Colors.white,)
-//               ),
-//             ],
-//           ),
-//         ),
-//
-//         Align(
-//           alignment: Alignment.topLeft,
-//           child: Text(data['title'],
-//             style:TextStyle(
-//               fontSize: 25,
-//               fontWeight: FontWeight.bold
-//             ) ,
-//           ),
-//         ),
-//
-//         Align(
-//           alignment: Alignment.topLeft,
-//           child: Text(data['description'],
-//             style:TextStyle(
-//                overflow: TextOverflow.ellipsis,
-//             ) ,
-//             maxLines: 3,
-//
-//           ),
-//         ),
-//
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//
-//             Text("⭐ ${data['rating'].toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-//
-//             Text("🔥 100 Kcal",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-//
-//             Text("⏰ 5-10 Min",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-//
-//           ],
-//         ),
-//         Align(
-//           alignment: Alignment.topLeft,
-//             child: Text("Ingradients",
-//               style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),
-//             )
-//         ),
-//
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             box(data['Ingradients'][0]),
-//             box(data['Ingradients'][1]),
-//             box(data["Ingradients"][2]),
-//             box(data["Ingradients"][3]),
-//             box(data["Ingradients"][4]),
-//
-//
-//           ],
-//         ),
-//
-//
-//         Container(
-//           width: w,
-//           height: 50,
-//
-//           decoration: BoxDecoration(
-//             color: cgreen,
-//             borderRadius: BorderRadius.circular(10),
-//           ),
-//           alignment: Alignment.center,
-//           child: Text("Add To Cart",
-//           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
-//           ),
-//         )
-//       ],
-//     ),
-//   ),
-// )

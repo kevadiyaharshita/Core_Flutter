@@ -1,3 +1,4 @@
+
 import 'package:appmania/utils/Color_utils.dart';
 import 'package:appmania/utils/my_Routes_utils.dart';
 import 'package:appmania/utils/variable.dart';
@@ -16,7 +17,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-
+  String category="";
+  Color allItems_clr=cgreen;
+  Color allItem_txt=Colors.white;
+  Color salad_clr=subColor;
+  Color salad_txt=Colors.black;
+  Color pizza_clr=subColor;
+  Color pizza_txt=Colors.black;
   @override
   Widget build(BuildContext context) {
     Size s=MediaQuery.of(context).size;
@@ -33,14 +40,19 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: 7,
             ),
-            Text("Habiganj City",
+            Text("Surat City",
             style: TextStyle(color: Colors.black),
             )
           ],
         ),
 
         actions: [
-             Icon(Icons.sort_outlined,color: Colors.black,),
+             GestureDetector(
+               onTap: (){
+                 Navigator.of(context).pushNamed(MyRoutes.cartPage);
+               },
+                 child: Icon(Icons.shopping_basket,color: Colors.black,)
+             ),
           // ),
           SizedBox(width: 10,)
         ],
@@ -49,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: HPBackGroundColor,
       ),
       body: Padding(
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.fromLTRB(18, 18, 18, 0),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
@@ -97,8 +109,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         width: 75,
                       ),
-                      Icon(Icons.add_call,color: Colors.black54,size: 30),
-
+                      Icon(Icons.filter_alt_outlined,color: Colors.black54,size: 30),
                     ],
 
                   ),
@@ -134,53 +145,118 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color:cgreen,// Color(0xff5DCF41),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text("Salads",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold
-                    ),
-                    ),
-                  ),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
 
-                  Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color:subColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text("Hot Sale",
+                        category_Item.clear();
+                        for(int i=0;i<allProduct.length;i++)
+                          {
+
+                                category_Item.add(allProduct[i]);
+                          }
+                        allItems_clr=cgreen;
+                        allItem_txt=Colors.white;
+                        pizza_clr=subColor;
+                        pizza_txt=Colors.black;
+                        salad_clr=subColor;
+                        salad_txt=Colors.black;
+
+
+
+                      });
+
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color:allItems_clr,// Color(0xff5DCF41),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("All Items",
                       style: TextStyle(
-
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
+                        color: allItem_txt,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                      ),
                       ),
                     ),
                   ),
 
-                  Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color:subColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text("Popularity",
-                      style: TextStyle(
+                  InkWell(
+                    onTap: (){
+                      setState(() {
 
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
+                        category="Salad";
+                        category_Item.clear();
+                        for(int i=0;i<allProduct.length;i++)
+                        {
+                          if(category==allProduct[i]['category'])
+                            category_Item.add(allProduct[i]);
+                        }
+                        salad_clr=cgreen;
+                        salad_txt=Colors.white;
+                        pizza_clr=subColor;
+                        pizza_txt=Colors.black;
+
+                        allItems_clr=subColor;
+                        allItem_txt=Colors.black;
+
+                      });
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color:salad_clr,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("Salad",
+                        style: TextStyle(
+                            color: salad_txt,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        category="Pizza";
+                        category_Item.clear();
+                        for(int i=0;i<allProduct.length;i++)
+                        {
+                        if(category==allProduct[i]['category'])
+                        category_Item.add(allProduct[i]);
+                        }
+                        pizza_clr=cgreen;
+                        pizza_txt=Colors.white;
+                        salad_clr=subColor;
+                        salad_txt=Colors.black;
+                        allItem_txt=Colors.black;
+                        allItems_clr=subColor;
+
+                      });
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color:pizza_clr,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("Pizza",
+                        style: TextStyle(
+                            color: pizza_txt,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ),
@@ -191,8 +267,13 @@ class _HomePageState extends State<HomePage> {
                 height: 15,
               ),
 
-              for(int i=0;i<allProduct.length/2;i++)
-                eachRow(allProduct[i],allProduct[i+5],category_con_width),
+
+
+              for(int i=0;i<category_Item.length/2;i++)
+                eachRow(category_Item[i],category_Item[i+(category_Item.length/2).toInt()],category_con_width,category),
+
+
+
 
             ],
           ),
@@ -202,17 +283,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-
-
-
-
-  Widget eachRow(Map e,Map e1,double w)
+  Widget eachRow(Map e,Map e1,double w,String cat)
   {
    return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children:[
-        GestureDetector(
+        // if(cat == e['category'])
+          GestureDetector(
           onTap: (){
             Navigator.of(context).pushNamed(
                 MyRoutes.detailPage,
@@ -315,17 +392,7 @@ class _HomePageState extends State<HomePage> {
                              {
                                e['qty']=1;
                              }
-                           // bool check=false;
-                           // for(int i=0;i<HP_Counter.length;i++)
-                           //   {
-                           //     // check=HP_Counter[i].contains(e['id']);
-                           //    check= HP_Counter[i].containsValue(e['id']);
-                           //   }
-                           //
-                           // if(check == false)
-                           //   {
-                           //     HP_Counter.add(tmp_qtyMap);
-                           //   }
+
                          });
                        },
                         child: Container(
@@ -349,7 +416,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        GestureDetector(
+        // if(cat == e1['category'])
+           GestureDetector(
           onTap: (){
             // Navigator.of(context).push(
             //   MaterialPageRoute(builder: (context)=>detail_Page(),),
@@ -448,24 +516,13 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomRight,
                       child: GestureDetector(
                         onTap: (){
-                          // Map tmp_qtyMap=e1;
-                          // tmp_qtyMap.addAll({'qty': 1});
+
 
                           setState(() {
                             if(e1['qty']==0) {
                               e1['qty'] = 1;
                             }
-                            // bool check=false;
-                            // for(int i=0;i<HP_Counter.length;i++)
-                            // {
-                            //   // check=HP_Counter[i].contains(e['id']);
-                            //   check= HP_Counter[i].containsValue(e1['id']);
-                            // }
-                            //
-                            // if(check == false)
-                            // {
-                            //   HP_Counter.add(tmp_qtyMap);
-                            // }
+
                           });
                         },
                         child: Container(
