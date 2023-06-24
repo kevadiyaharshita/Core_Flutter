@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                   InkWell(
                     onTap: (){
                       setState(() {
-
+                        category="All Items";
                         category_Item.clear();
                         for(int i=0;i<allProduct.length;i++)
                           {
@@ -516,8 +516,6 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomRight,
                       child: GestureDetector(
                         onTap: (){
-
-
                           setState(() {
                             if(e1['qty']==0) {
                               e1['qty'] = 1;

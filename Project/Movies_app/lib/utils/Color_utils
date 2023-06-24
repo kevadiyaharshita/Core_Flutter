@@ -1,0 +1,5 @@
+import 'package:flutter/material.dart';
+
+
+Color mybg=Colors.white;
+Color themeColor = const Color.fromRGBO(255, 83, 83, 1);

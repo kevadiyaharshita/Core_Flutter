@@ -13,9 +13,18 @@ class detail_Page extends StatefulWidget {
 }
 
 class _detail_PageState extends State<detail_Page> {
+  // AnimationController? controller;
+  // Animation<double>? animation;
+  //
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   controller = AnimationController(vsync: TickerProviderStateMixin,duration: Duration(seconds: 3));
+  // }
+
   int count=1;
   @override
-
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
     Size s=MediaQuery.of(context).size;

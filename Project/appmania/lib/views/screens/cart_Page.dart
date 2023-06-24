@@ -57,6 +57,7 @@ class _cartPageState extends State<cartPage> {
 
       body: Center(
         child: Container(
+
           width: w,
           height: h,
           decoration: BoxDecoration(
@@ -66,7 +67,7 @@ class _cartPageState extends State<cartPage> {
           child: Container(
             width: w,
             height: h-120,
-
+             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
             decoration: BoxDecoration(
               color: HPBackGroundColor,
               borderRadius: BorderRadius.vertical(top: Radius.circular(30))
@@ -74,8 +75,10 @@ class _cartPageState extends State<cartPage> {
 
             alignment: Alignment.center,
             child: Stack(
+
               children: [
                  Column(
+
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
                     Container(
@@ -256,7 +259,7 @@ class _cartPageState extends State<cartPage> {
                     Container(
                       padding: EdgeInsets.all(18),
                       width: w,
-                      height: 260,
+                      height: 255,
                       decoration: BoxDecoration(
                         color: subColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -264,7 +267,7 @@ class _cartPageState extends State<cartPage> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 40,
+                            height: 35,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -351,23 +354,4 @@ class _cartPageState extends State<cartPage> {
     );
   }
 }
-
-Widget eachRow(int i)
-{
-  if(allProduct[i]['qty']!=0)
-    {
-      return Row(
-          children: [
-
-          ],
-      );
-    }
-  else
-    {
-      return Container();
-    }
-
-
-}
-
 
