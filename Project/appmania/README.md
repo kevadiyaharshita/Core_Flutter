@@ -7,9 +7,8 @@
 <img src="https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/35fe38cc-a088-481b-9ff5-11b55a5c4ba9" width="300px">
 <img src="https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/d95abd3b-6d92-423d-9909-3386d1640235" width="300px">
 
-<video width="320" height="240" controls>
-  <source src="C:\Users\SARANG\Desktop\23-06-14-18-56-36.mp4" type="video/mp4">
-</video>
+https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/4850c746-a387-42a3-9570-e7f5a0c6ad89
+
 
 
 
