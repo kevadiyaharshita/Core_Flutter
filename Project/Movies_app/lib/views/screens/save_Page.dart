@@ -39,9 +39,16 @@ class _save_PageState extends State<save_Page> {
                 Container(
                   width: w,
                   height: h*0.5,
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(data['title'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35),)
+                    ],
                   ),
                 )
               ],
