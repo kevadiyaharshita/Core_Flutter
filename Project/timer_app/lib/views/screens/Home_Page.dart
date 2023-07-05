@@ -632,6 +632,8 @@ class _HomePageState extends State<HomePage> {
                     isreverse_pause = false;
                     tmp_sec = null;
                     tmp_min = null;
+                    r_sec = 0;
+                    r_min = 0;
                   }
               },
               child:(timer)? Icon(Icons.stop,color: Colors.black54,):Icon(Icons.restart_alt,color: Colors.black54,),
