@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:timer_app/utils/colors_utils.dart';
 
 import '../../utils/flag_lap.dart';
 
@@ -38,12 +40,14 @@ class _HomePageState extends State<HomePage> {
   int? tmp_sec;
   int? tmp_min;
 
+  bool isreverse_pause = false;
+
   startReverseTimer()
   {
-    if(isselectedTime)
+    if(isselectedTime && (!isreverse_pause))
     {
       Future.delayed(
-          const Duration(milliseconds: 100),
+          const Duration(seconds: 1),
               (){
             setState(() {
              if(r_min != 0)
@@ -62,8 +66,6 @@ class _HomePageState extends State<HomePage> {
                {
                  r_sec = r_sec - 1;
                }
-
-
             });
             startReverseTimer();
           }
@@ -76,7 +78,7 @@ class _HomePageState extends State<HomePage> {
    if(isRunning)
      {
        Future.delayed(
-           const Duration(milliseconds: 100),
+           const Duration(seconds: 1),
                (){
              setState(() {
                sec++;
@@ -125,7 +127,7 @@ class _HomePageState extends State<HomePage> {
           angle: (index * (pi * 2)) / 60,
           child: Divider(
             thickness: (index % 5 == 0) ? 3 : 1,
-            color:  (index % 5 == 0) ? Colors.red: Colors.white,
+            color:  (index % 5 == 0) ? f_button: Colors.white,
             endIndent:  (index % 5 == 0) ? w * 0.88 : w * 0.91,
             indent: 20,
           ),
@@ -137,7 +139,7 @@ class _HomePageState extends State<HomePage> {
   Widget circle_avatar()
   {
     return  Visibility(
-        visible: timer || analog,
+        visible: timer || analog||reverse_timer,
         child: CircleAvatar(
           radius: 10,
           backgroundColor: Colors.white,
@@ -165,12 +167,16 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Drawer(
         // width: 300,
-
+        backgroundColor: Colors.black,
+        // shape: CircleBorder(),
         child: Column(
           children: [
             Align(
               alignment: Alignment.center,
               child: const UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                color: Colors.black
+                ),
                 currentAccountPicture: CircleAvatar(
                   foregroundImage: NetworkImage("https://i.pinimg.com/564x/a3/f6/33/a3f633158efd6f9b2348adad7fd96c34.jpg"),
                   radius: 10,
@@ -181,8 +187,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             ListTile(
-              title: Text("Digital Clock"),
+              title: Text("Digital Clock",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
               trailing: Switch(
+                activeColor: Colors.white,
+                activeTrackColor: f_button,
                 value: digital,
                 onChanged: (val){
                   setState(() {
@@ -196,8 +204,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             ListTile(
-              title: Text("Analog Live"),
+              title: Text("Analog Live",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
               trailing: Switch(
+                activeColor: Colors.white,
+                activeTrackColor: f_button,
                 value: analog,
                 onChanged: (val){
                   setState(() {
@@ -212,8 +222,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             ListTile(
-              title: Text("Timer"),
+              title: Text("Timer",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
               trailing: Switch(
+                activeColor: Colors.white,
+                activeTrackColor: f_button,
                 value: timer,
                 onChanged: (val){
                   setState(() {
@@ -228,8 +240,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             ListTile(
-              title: Text("Reverse Timer"),
+              title: Text("Reverse Timer",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
               trailing: Switch(
+                activeColor: Colors.white,
+                activeTrackColor: f_button,
                 value: reverse_timer,
                 onChanged: (val){
                   setState(() {
@@ -239,15 +253,17 @@ class _HomePageState extends State<HomePage> {
                     straps = false ;
                     digital = false;
                     isselectedTime = false;
-
+                    isreverse_pause = false;
                   });
                 },
               ),
             ),
 
             ListTile(
-              title: Text("Straps"),
+              title: Text("Straps",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
               trailing: Switch(
+                activeColor: Colors.white,
+                activeTrackColor: Colors.red,
                 value: straps,
                 onChanged: (val){
                   setState(() {
@@ -264,7 +280,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Center(
-        child: Stack(
+        child: (timer || reverse_timer || straps || digital || analog )?
+        Stack(
           alignment: Alignment.center,
           children:[
 
@@ -321,28 +338,30 @@ class _HomePageState extends State<HomePage> {
 
                     decoration: BoxDecoration(
                       color: Colors.black54,
-
-                      boxShadow: [
-                        BoxShadow(
-
-                        )
-                      ]
                     ),
 
                     alignment: Alignment.bottomCenter,
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                           Divider(),
-                          ...flag_timer.map((e) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           Divider(
+                             color: divider_color,
+                           ),
+                          ...flag_timer.map((e) => Column(
                             children: [
-                              Text("Flag ${flag_timer.indexOf(e)+1}\n",style: TextStyle(fontSize: 18,color: Colors.white),),
-                              Text("$e\n",style: TextStyle(fontSize: 18,color: Colors.white),),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Flag ${flag_timer.indexOf(e)+1}",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                  Text("$e",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                ],
+
+                              ),
+                              Divider(color: divider_color,),
                             ],
                           )
                           ),
-                          Divider(),
+
                         ],
                       ),
                     ),
@@ -355,53 +374,53 @@ class _HomePageState extends State<HomePage> {
             // reverse timer
             Visibility(
               visible: reverse_timer,
-              child: (!isselectedTime)?
+              child: ((!isselectedTime) && (!isreverse_pause))?
               Visibility(
                 visible: !isselectedTime,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-
                     DropdownButton(
                       hint: Text("Minutes",style: TextStyle(color: Colors.grey),),
                       value: tmp_min,
                       dropdownColor: Colors.black54,
                       style: TextStyle(color: Colors.grey,fontSize: 18),
                       items: List.generate(59, (index) =>
-                          DropdownMenuItem(
-                              value: index,
-                              child: Text("$index"))
+                      DropdownMenuItem(
+                      value: index,
+                      child: Text("$index"))
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          r_min=int.parse(value.toString());
-                          tmp_min=value;
-                        });
+                      setState(() {
+                      r_min=int.parse(value.toString());
+                      tmp_min=value;
+                      });
                       },
-                    ),
-                    DropdownButton(
+                      ),
+                      DropdownButton(
+                        itemHeight: 50,
                       hint: Text("Seconds",style: TextStyle(color: Colors.grey),),
                       value: tmp_sec,
                       dropdownColor: Colors.black54,
                       style: TextStyle(color: Colors.grey,fontSize: 18),
                       items: List.generate(59, (index) =>
-                          DropdownMenuItem(
-                              value: index,
-                              child: Text("$index"))
+                      DropdownMenuItem(
+                      value: index,
+                      child: Text("$index"))
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          r_sec=value!;
-                          tmp_sec=value;
-                        });
+                      setState(() {
+                      r_sec=value!;
+                      tmp_sec=value;
+                      });
                       },
-                    ),
+                      ),
 
                   ],
                 ),
               ):
               Visibility(
-                visible: isselectedTime,
+                visible: isselectedTime || (isreverse_pause && (!isselectedTime)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   // mainAxisSize: MainAxisSize.min,
@@ -412,6 +431,7 @@ class _HomePageState extends State<HomePage> {
 
                       children: [
                         numbers_clock(w),
+
                         Transform.rotate(
                           angle:( r_sec * (pi * 2) / 60)  + pi / 2,
                           child: Divider(
@@ -448,16 +468,20 @@ class _HomePageState extends State<HomePage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Divider(),
-                            ...flag_reverse_timer.map((e) => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Divider(color: divider_color,),
+                            ...flag_reverse_timer.map((e) => Column(
                               children: [
-                                Text("Flag ${flag_reverse_timer.indexOf(e)+1}\n",style: TextStyle(fontSize: 18,color: Colors.white),),
-                                Text("$e\n",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Flag ${flag_reverse_timer.indexOf(e)+1}",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                    Text("$e",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                  ],
+                                ),
+                                Divider(color: divider_color,),
                               ],
                             )
                             ),
-                            Divider(),
                           ],
                         ),
                       ),
@@ -466,13 +490,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: [
-              //
-              //
-              //     ],
-              // ),
             ),
 
 
@@ -484,7 +501,7 @@ class _HomePageState extends State<HomePage> {
                   Transform.scale(
                     scale: 9,
                     child: CircularProgressIndicator(
-                    color: Colors.red,
+                    color: f_button,
                     value: live_sec.toDouble() / 60,
                     strokeWidth: 1.5,
 
@@ -504,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                   Transform.scale(
                     scale: 7.1,
                     child: CircularProgressIndicator(
-                      color: Colors.grey,
+                      color: Colors.white,
                       value: (live_hour.toDouble()+ live_min/60) / 12,
                       strokeWidth: 2,
                     ),
@@ -559,13 +576,24 @@ class _HomePageState extends State<HomePage> {
             //Digital
             Visibility(
               visible: digital,
-                child: Text("$live_hour  : $live_min : $live_sec",style: TextStyle(fontSize: 22,color: Colors.lightGreen),)),
+                child: Text("${live_hour.toString().padLeft(2,"0")}  : ${live_min.toString().padLeft(2,"0")} : ${live_sec.toString().padLeft(2,"0")}",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 32,color: f_button),)),
 
 
           ]
+        )
+        :Container(
+          height: h,
+          width: w,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            image: DecorationImage(
+              image: NetworkImage('https://i.pinimg.com/564x/e5/67/8c/e5678c51e73601b5dae68d3ff73d9d43.jpg'),
+              // fit: BoxFit.contain
+            )
+          ),
         ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.black54,
       floatingActionButton: Visibility(
         visible: timer || reverse_timer,
 
@@ -575,7 +603,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             SizedBox(width: 8,),
             FloatingActionButton(
-              backgroundColor:Colors.red,
+              backgroundColor:f_button,
               onPressed: (){
                 if(isRunning == true)
                   {
@@ -591,7 +619,7 @@ class _HomePageState extends State<HomePage> {
 
             SizedBox(width: 15,),
             FloatingActionButton(
-              backgroundColor:Colors.red,
+              backgroundColor:f_button,
               onPressed: (){
                 if(isRunning)
                   {
@@ -601,17 +629,17 @@ class _HomePageState extends State<HomePage> {
                   {
                     flag_reverse_timer = [];
                     isselectedTime = false;
+                    isreverse_pause = false;
                     tmp_sec = null;
                     tmp_min = null;
                   }
-
               },
               child:(timer)? Icon(Icons.stop,color: Colors.black54,):Icon(Icons.restart_alt,color: Colors.black54,),
             ),
 
             SizedBox(width: 15,),
             FloatingActionButton(
-              backgroundColor:Colors.red,
+              backgroundColor:(isselectedTime)?Colors.green:f_button,
               onPressed: (){
                 if((! isRunning ) && timer)
                   {
@@ -621,11 +649,16 @@ class _HomePageState extends State<HomePage> {
                 if((! isselectedTime) && reverse_timer)
                   {
                     isselectedTime = true;
-
+                    isreverse_pause = false;
                     startReverseTimer();
                   }
+                else if(isselectedTime && reverse_timer)
+                  {
+                    isreverse_pause = true;
+                    isselectedTime = false;
+                  }
               },
-              child: Icon(Icons.timer,color: Colors.black54,),
+              child: (isselectedTime)?Icon(Icons.stop,color: Colors.black54,):Icon(Icons.timer,color: Colors.black54,),
             ),
           ],
         ),
