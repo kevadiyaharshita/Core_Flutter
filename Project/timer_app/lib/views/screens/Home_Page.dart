@@ -625,7 +625,7 @@ class _HomePageState extends State<HomePage> {
                   {
                     isRunning = false;
                   }
-                if(isselectedTime)
+                if(isselectedTime ||  isreverse_pause)
                   {
                     flag_reverse_timer = [];
                     isselectedTime = false;
