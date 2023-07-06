@@ -36,11 +36,14 @@ class _HomePageState extends State<HomePage> {
 
   int r_sec = 0;
   int r_min = 0;
+  int r_hour = 0;
 
   int? tmp_sec;
   int? tmp_min;
+  int? tmp_hour;
 
   bool isreverse_pause = false;
+  bool isPause = false;
 
   startReverseTimer()
   {
@@ -50,11 +53,27 @@ class _HomePageState extends State<HomePage> {
           const Duration(seconds: 1),
               (){
             setState(() {
-             if(r_min != 0)
+             if(r_hour > 0)
                {
                  if(r_sec == 0)
                    {
-                     r_sec = 59;
+                     r_sec = 60;
+                     if(r_min > 0)
+                       {
+                         r_min--;
+                       }
+                     else{
+                       r_min = 60;
+                       r_hour--;
+                     }
+                   }
+                 r_sec--;
+               }
+             else if(r_min != 0)
+               {
+                 if(r_sec == 0)
+                   {
+                     r_sec = 60;
                      r_min = r_min - 1;
                    }
                  else
@@ -162,7 +181,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Clock App"),
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: bg_color,
         centerTitle: true,
       ),
       drawer: Drawer(
@@ -263,7 +282,7 @@ class _HomePageState extends State<HomePage> {
               title: Text("Straps",style: TextStyle(color:Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
               trailing: Switch(
                 activeColor: Colors.white,
-                activeTrackColor: Colors.red,
+                activeTrackColor: f_button,
                 value: straps,
                 onChanged: (val){
                   setState(() {
@@ -299,16 +318,31 @@ class _HomePageState extends State<HomePage> {
                   children: [
 
                        numbers_clock(w),
+                       circle_avatar(),
+
+
+                         Column(
+                           children: [
+                             Container(
+                               height: 100,
+                               width: 100,
+                               color: Colors.transparent,
+                             ),
+                             Text("${hour.toString().padLeft(2,"0")}  : ${min.toString().padLeft(2,"0")} : ${sec.toString().padLeft(2,"0")}",
+                              style: TextStyle(fontWeight:FontWeight.bold,fontSize: 32,color: Colors.white),),
+                           ],
+                         ),
+
                        Transform.rotate(
                         angle:( sec * (pi * 2) / 60)  + pi / 2,
                         child: Divider(
-                          color: Colors.red,
+                          color: f_button,
                           thickness: 2,
                           indent: 30,
                           endIndent: w / 2,
                         ),
                       ),
-                      circle_avatar(),
+
                       Transform.rotate(
                         angle: (min * (pi * 2) / 60)+ pi /2,
                         child: Divider(
@@ -328,6 +362,8 @@ class _HomePageState extends State<HomePage> {
                           endIndent: w / 2,
                         ),
                       ),
+
+
                     ],
                   ),
                    SizedBox(height: 50,),
@@ -337,7 +373,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(10),
 
                     decoration: BoxDecoration(
-                      color: Colors.black54,
+                      color: sub_Color,
                     ),
 
                     alignment: Alignment.bottomCenter,
@@ -380,6 +416,33 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
+                    // ListWheelScrollView(
+                    //
+                    //   children: List.generate(12, (index) => Container(
+                    //     width: 50,
+                    //     height: 50,
+                    //     child: Text("$index"),
+                    //   )),
+                    //   itemExtent: 12,
+                    // ),
+                    DropdownButton(
+                      hint: Text("Hour",style: TextStyle(color: Colors.grey),),
+                      value: tmp_hour,
+                      dropdownColor: Colors.black54,
+                      style: TextStyle(color: Colors.grey,fontSize: 18),
+                      items: List.generate(12, (index) =>
+                          DropdownMenuItem(
+                              value: index+1,
+                              child: Text("${index+1}"))
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          r_hour=int.parse(value.toString());
+                          tmp_hour=value;
+                        });
+                      },
+                    ),
                     DropdownButton(
                       hint: Text("Minutes",style: TextStyle(color: Colors.grey),),
                       value: tmp_min,
@@ -387,8 +450,8 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(color: Colors.grey,fontSize: 18),
                       items: List.generate(59, (index) =>
                       DropdownMenuItem(
-                      value: index,
-                      child: Text("$index"))
+                      value: index+1,
+                      child: Text("${index+1}"))
                       ),
                       onChanged: (value) {
                       setState(() {
@@ -401,12 +464,12 @@ class _HomePageState extends State<HomePage> {
                         itemHeight: 50,
                       hint: Text("Seconds",style: TextStyle(color: Colors.grey),),
                       value: tmp_sec,
-                      dropdownColor: Colors.black54,
+                      dropdownColor: sub_Color,
                       style: TextStyle(color: Colors.grey,fontSize: 18),
                       items: List.generate(59, (index) =>
                       DropdownMenuItem(
-                      value: index,
-                      child: Text("$index"))
+                      value: index+1,
+                      child: Text("${index+1}"))
                       ),
                       onChanged: (value) {
                       setState(() {
@@ -431,6 +494,17 @@ class _HomePageState extends State<HomePage> {
 
                       children: [
                         numbers_clock(w),
+                        Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              color: Colors.transparent,
+                            ),
+                            Text("${r_hour.toString().padLeft(2,"0")} :${r_min.toString().padLeft(2,"0")} : ${r_sec.toString().padLeft(2,"0")}",
+                              style: TextStyle(fontWeight:FontWeight.bold,fontSize: 32,color: Colors.white),),
+                          ],
+                        ),
 
                         Transform.rotate(
                           angle:( r_sec * (pi * 2) / 60)  + pi / 2,
@@ -438,6 +512,15 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.red,
                             thickness: 2,
                             indent: 30,
+                            endIndent: w / 2,
+                          ),
+                        ),
+                        Transform.rotate(
+                          angle: ((r_hour ) * (pi * 2) / 12) + pi / 2,
+                          child: Divider(
+                            color: Colors.white,
+                            thickness: 5,
+                            indent: 70,
                             endIndent: w / 2,
                           ),
                         ),
@@ -521,7 +604,7 @@ class _HomePageState extends State<HomePage> {
                   Transform.scale(
                     scale: 7.1,
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Colors.grey,
                       value: (live_hour.toDouble()+ live_min/60) / 12,
                       strokeWidth: 2,
                     ),
@@ -576,7 +659,7 @@ class _HomePageState extends State<HomePage> {
             //Digital
             Visibility(
               visible: digital,
-                child: Text("${live_hour.toString().padLeft(2,"0")}  : ${live_min.toString().padLeft(2,"0")} : ${live_sec.toString().padLeft(2,"0")}",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 32,color: f_button),)),
+                child: Text("${live_hour.toString().padLeft(2,"0")}  : ${live_min.toString().padLeft(2,"0")} : ${live_sec.toString().padLeft(2,"0")}",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 32,color: Colors.grey),)),
 
 
           ]
@@ -618,35 +701,54 @@ class _HomePageState extends State<HomePage> {
             ),
 
             SizedBox(width: 15,),
+
+            //restart
             FloatingActionButton(
               backgroundColor:f_button,
               onPressed: (){
-                if(isRunning)
-                  {
-                    isRunning = false;
-                  }
-                if(isselectedTime ||  isreverse_pause)
-                  {
-                    flag_reverse_timer = [];
-                    isselectedTime = false;
-                    isreverse_pause = false;
-                    tmp_sec = null;
-                    tmp_min = null;
-                    r_sec = 0;
-                    r_min = 0;
-                  }
+               setState(() {
+                 if(isRunning || timer)
+                 {
+                   sec = 0;
+                   min = 0;
+                   hour = 0;
+                   h_cnt = 0;
+                   isRunning = false;
+                   isPause = false;
+
+                   flag_timer = [];
+                 }
+                 if(isselectedTime ||  isreverse_pause || reverse_timer)
+                 {
+                   flag_reverse_timer = [];
+                   isselectedTime = false;
+                   isreverse_pause = false;
+                   tmp_sec = null;
+                   tmp_min = null;
+                   tmp_hour = null;
+                   r_sec = 0;
+                   r_min = 0;
+                   r_hour = 0;
+                 }
+               });
               },
-              child:(timer)? Icon(Icons.stop,color: Colors.black54,):Icon(Icons.restart_alt,color: Colors.black54,),
+              child:Icon(Icons.restart_alt,color: Colors.black54,),
             ),
 
             SizedBox(width: 15,),
             FloatingActionButton(
-              backgroundColor:(isselectedTime)?Colors.green:f_button,
+              backgroundColor:f_button,
               onPressed: (){
                 if((! isRunning ) && timer)
                   {
                     isRunning = true;
+                    isPause = false;
                     startTimer();
+                  }
+                else if(isRunning && timer)
+                  {
+                    isPause = true;
+                    isRunning = false;
                   }
                 if((! isselectedTime) && reverse_timer)
                   {
@@ -660,7 +762,7 @@ class _HomePageState extends State<HomePage> {
                     isselectedTime = false;
                   }
               },
-              child: (isselectedTime)?Icon(Icons.stop,color: Colors.black54,):Icon(Icons.timer,color: Colors.black54,),
+              child: (isselectedTime)?Icon(Icons.stop,color: Colors.black54,):(isRunning)?Icon(Icons.stop,color: Colors.black54,):Icon(Icons.timer,color: Colors.black54,),
             ),
           ],
         ),
