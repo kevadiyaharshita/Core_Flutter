@@ -694,7 +694,7 @@ class _HomePageState extends State<HomePage> {
                   }
                 if(isselectedTime == true)
                   {
-                    flag_reverse_timer.add("${r_min.toString().padLeft(2,'0')} : ${r_sec.toString().padLeft(2,'0')}");
+                    flag_reverse_timer.add("${r_hour.toString().padLeft(2,'0')} :${r_min.toString().padLeft(2,'0')} : ${r_sec.toString().padLeft(2,'0')}");
                   }
               },
               child: Icon(Icons.flag,color: Colors.black54,),
