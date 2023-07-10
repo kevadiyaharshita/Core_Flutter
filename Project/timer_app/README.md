@@ -1,13 +1,7 @@
 # timer_app
 
 
-https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/0d95b598-0d56-4e3d-8534-40dfa8177be9
-
-
-
-
-
-
+https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/f2e5aacf-bc59-4450-8d71-9b037be69ba0
 
 
 <img src="https://github.com/kevadiyaharshita/Core_Flutter/assets/133105068/3c27d318-f0ab-4fb6-84a1-8c50e594cd42" width="300px">
