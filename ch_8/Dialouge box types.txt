@@ -1,0 +1,56 @@
+   ElevatedButton(onPressed: (){
+              showDialog(context: context, builder: (context) => AlertDialog(
+                title: Text("Alert!!"),
+                content: Text(loremIpsum(words: 50)),
+              ));
+
+            }, child: Text("Simple Dialogue Box")),
+            ElevatedButton(onPressed: (){
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => AlertDialog(
+                    title: Text("Alert!!"),
+                    content: Text(loremIpsum(words: 10)),
+                    actions: [
+                      ElevatedButton(onPressed: (){
+                        Navigator.of(context).pop();
+                      }, child: Text("OK")),
+                      TextButton(onPressed: (){
+                        Navigator.of(context).pop();
+                      }, child: Text("CANCEL")),
+                    ],
+                  )
+              );
+
+            }, child: Text("Confirmation Dialogue Box")),
+            ElevatedButton(onPressed: (){
+            showGeneralDialog(
+                context: context,
+                pageBuilder: (context, _, __) => Scaffold(
+                  body: Column(
+                    children: [
+                      Spacer(),
+                      FlutterLogo(size: 350,),
+                      Spacer(),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          child: Theme(
+                          data: ThemeData(),
+                            child: ElevatedButton(
+                              onPressed: (){
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("BACK"),
+                            ),
+
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+            );
+
+            }, child: Text("general Dialogue Box")),
