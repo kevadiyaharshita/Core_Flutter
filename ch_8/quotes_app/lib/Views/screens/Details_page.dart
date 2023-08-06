@@ -1,11 +1,17 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:quotes_app/modals/quotes_modal.dart';
 import 'package:quotes_app/utils/color_utils.dart';
+import 'package:share_extend/share_extend.dart';
 
 import '../../utils/canvas_utils.dart';
 
@@ -127,6 +133,8 @@ class _Detail_PageState extends State<Detail_Page> {
   bool canvasEditing = false;
   bool imageEditing = false;
 
+  GlobalKey key = GlobalKey();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -205,79 +213,82 @@ class _Detail_PageState extends State<Detail_Page> {
       body: Column(
         children: [
           // SizedBox(height: 30,),
-          Container(
-            width: w,
-            height: 400,
-            margin: EdgeInsets.all(16),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: (bgColourSlider == "BackGround Color") ? bgColor : null,
-              gradient: (bgColourSlider == "Gradient Color")
-                  ? LinearGradient(
-                      colors: [bggradient_1, bggradient_2],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter)
-                  : null,
-              image: (canvasImage != null)
-                  ? DecorationImage(
-                      image: NetworkImage(canvasImage!), fit: BoxFit.fill)
-                  : null,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey, offset: Offset(5, 5), blurRadius: 12)
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Spacer(),
-                SelectableText(
-                  quote_data.quote,
-                  // overflow: TextOverflow.ellipsis,
-                  maxLines: 7,
-                  style: (fontFamilyIndexVal != null)
-                      ? quoteFontFamily[fontFamilyIndexVal!].merge(
-                          TextStyle(
-                              letterSpacing: quoteLetterSpace,
-                              fontWeight: qouteFontWeight,
-                              fontSize: quoteFontSize,
-                              color: (ftColor == null)
-                                  ? theme_4.withOpacity(fontOpacity)
-                                  : ftColor.withOpacity(fontOpacity)),
-                        )
-                      : TextStyle(
-                          letterSpacing: quoteLetterSpace,
-                          fontWeight: qouteFontWeight,
-                          fontSize: quoteFontSize,
-                          color: (ftColor == null)
-                              ? theme_4.withOpacity(fontOpacity)
-                              : ftColor.withOpacity(fontOpacity)),
-                  textAlign: quoteAlign,
-                ),
-                Spacer(
-                  flex: 2,
-                ),
-                Text(
-                  "- ${quote_data.author}",
-                  style: (fontFamilyIndexVal != null)
-                      ? quoteFontFamily[fontFamilyIndexVal!].merge(
-                          TextStyle(
-                              fontWeight: qouteFontWeight,
-                              fontSize: quoteFontSize - 2,
-                              color: (ftColor == null)
-                                  ? theme_4.withOpacity(fontOpacity)
-                                  : ftColor.withOpacity(fontOpacity)),
-                        )
-                      : TextStyle(
-                          fontWeight: qouteFontWeight,
-                          fontSize: quoteFontSize - 2,
-                          color: (ftColor == null)
-                              ? theme_4.withOpacity(fontOpacity)
-                              : ftColor.withOpacity(fontOpacity)),
-                ),
-                Spacer(),
-              ],
+          RepaintBoundary(
+            key: key,
+            child: Container(
+              width: w,
+              height: 400,
+              margin: EdgeInsets.all(16),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: (bgColourSlider == "BackGround Color") ? bgColor : null,
+                gradient: (bgColourSlider == "Gradient Color")
+                    ? LinearGradient(
+                        colors: [bggradient_1, bggradient_2],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)
+                    : null,
+                image: (canvasImage != null)
+                    ? DecorationImage(
+                        image: NetworkImage(canvasImage!), fit: BoxFit.fill)
+                    : null,
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey, offset: Offset(5, 5), blurRadius: 12)
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Spacer(),
+                  SelectableText(
+                    quote_data.quote,
+                    // overflow: TextOverflow.ellipsis,
+                    maxLines: 7,
+                    style: (fontFamilyIndexVal != null)
+                        ? quoteFontFamily[fontFamilyIndexVal!].merge(
+                            TextStyle(
+                                letterSpacing: quoteLetterSpace,
+                                fontWeight: qouteFontWeight,
+                                fontSize: quoteFontSize,
+                                color: (ftColor == null)
+                                    ? theme_4.withOpacity(fontOpacity)
+                                    : ftColor.withOpacity(fontOpacity)),
+                          )
+                        : TextStyle(
+                            letterSpacing: quoteLetterSpace,
+                            fontWeight: qouteFontWeight,
+                            fontSize: quoteFontSize,
+                            color: (ftColor == null)
+                                ? theme_4.withOpacity(fontOpacity)
+                                : ftColor.withOpacity(fontOpacity)),
+                    textAlign: quoteAlign,
+                  ),
+                  Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    "- ${quote_data.author}",
+                    style: (fontFamilyIndexVal != null)
+                        ? quoteFontFamily[fontFamilyIndexVal!].merge(
+                            TextStyle(
+                                fontWeight: qouteFontWeight,
+                                fontSize: quoteFontSize - 2,
+                                color: (ftColor == null)
+                                    ? theme_4.withOpacity(fontOpacity)
+                                    : ftColor.withOpacity(fontOpacity)),
+                          )
+                        : TextStyle(
+                            fontWeight: qouteFontWeight,
+                            fontSize: quoteFontSize - 2,
+                            color: (ftColor == null)
+                                ? theme_4.withOpacity(fontOpacity)
+                                : ftColor.withOpacity(fontOpacity)),
+                  ),
+                  Spacer(),
+                ],
+              ),
             ),
           ),
           Spacer(),
@@ -353,7 +364,31 @@ class _Detail_PageState extends State<Detail_Page> {
 
                   //share
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      print("Sharing started...");
+
+                      final boundary = key.currentContext?.findRenderObject()
+                          as RenderRepaintBoundary?;
+                      final image = await boundary?.toImage();
+                      final byteData =
+                          await image?.toByteData(format: ImageByteFormat.png);
+                      final imageBytes = byteData?.buffer.asUint8List();
+
+                      if (imageBytes != null) {
+                        print("Bytes generated...");
+
+                        final directory =
+                            await getApplicationDocumentsDirectory();
+                        final imagePath =
+                            await File('${directory.path}/container_image.png')
+                                .create();
+                        await imagePath.writeAsBytes(imageBytes);
+
+                        ShareExtend.share(imagePath.path, "file")
+                            .then((value) => print("Sharedd.."))
+                            .onError((error, stackTrace) => print("Eroor..."));
+                      }
+                    },
                     child: Container(
                       width: 100,
                       padding: EdgeInsets.all(10),
@@ -1256,8 +1291,6 @@ class _Detail_PageState extends State<Detail_Page> {
           ),
 
           //Share Visibility
-
-          //
         ],
       ),
       backgroundColor: theme_4,
